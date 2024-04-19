@@ -15,7 +15,7 @@ export default function Home() {
     <main>
       <Title>Hello World</Title>
       <h1>Hello world!</h1>
-      <Show when={!shouldError}>
+      <Show when={shouldError}>
         <div>{JSON.stringify(data())}</div>
       </Show>
       <Counter />
