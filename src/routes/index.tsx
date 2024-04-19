@@ -1,17 +1,23 @@
 import { Title } from "@solidjs/meta";
-import { createResource } from "solid-js";
+import { Show, createResource } from "solid-js";
 import Counter from "~/components/Counter";
+import { useDebugContext } from "~/utils";
 
 export default function Home() {
   const [data] = createResource(async () => {
     const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
     return res.json();
   });
+
+  const shouldError = useDebugContext();
+
   return (
     <main>
       <Title>Hello World</Title>
       <h1>Hello world!</h1>
-      <div>{JSON.stringify(data())}</div>
+      <Show when={!shouldError}>
+        <div>{JSON.stringify(data())}</div>
+      </Show>
       <Counter />
       <p>
         Visit{" "}
